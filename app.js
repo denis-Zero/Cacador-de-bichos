@@ -97,7 +97,7 @@ async function processar(arquivo) {
     $("resultado").hidden = false; $("status").textContent = "";
     verificar();
   } catch (e) {
-    console.error(e); $("status").textContent = "Deu erro. Confira a chave da API e tente de novo.";
+    console.error(e); $("status").textContent = "Erro: " + e.message;
   }
 }
 ["foto", "galeria"].forEach(id => $(id).addEventListener("change", e => { processar(e.target.files[0]); e.target.value = ""; }));
@@ -117,16 +117,20 @@ const paraBase64 = async (f, m) => (await carregar(f, m)).toDataURL("image/jpeg"
 const miniatura = async f => (await carregar(f, 240)).toDataURL("image/jpeg", 0.7);
 
 async function identificarAnimal(b64) {
-  const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${MODELO}:generateContent?key=${GEMINI_KEY}`, {
-    method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      contents: [{ parts: [
-        { text: "Identifique o animal nesta foto. Responda apenas em JSON com: encontrado (true/false), nome_popular (português do Brasil) e nome_cientifico. Se não houver animal, encontrado false." },
-        { inline_data: { mime_type: "image/jpeg", data: b64 } }] }],
-      generationConfig: { response_mime_type: "application/json" } })
-  });
-  if (!r.ok) throw new Error("Gemini " + r.status);
-  return JSON.parse((await r.json()).candidates[0].content.parts[0].text);
+  const corpo = JSON.stringify({
+    contents: [{ parts: [
+      { text: "Identifique o animal nesta foto. Responda apenas em JSON com: encontrado (true/false), nome_popular (português do Brasil) e nome_cientifico. Se não houver animal, encontrado false." },
+      { inline_data: { mime_type: "image/jpeg", data: b64 } }] }],
+    generationConfig: { response_mime_type: "application/json" } });
+  let ultimo = "";
+  for (const m of MODELOS) {
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${GEMINI_KEY}`, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: corpo });
+    if (r.ok) return JSON.parse((await r.json()).candidates[0].content.parts[0].text);
+    ultimo = `${r.status} (${m}) ` + (await r.text()).slice(0, 160);
+    if (r.status === 400 || r.status === 403) break; // problema na chave ou no pedido
+  }
+  throw new Error(ultimo);
 }
 
 async function buscarWikipedia(popular, cientifico) {
