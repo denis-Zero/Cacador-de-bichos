@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caçador de Bichos</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo">🐾 Caçador de Bichos</div>
+  <div class="nivel"><b id="nivel">Nv 1</b><div class="barra"><i id="xpBarra"></i></div><small id="xpTxt">0 XP</small></div>
+</header>
+<main>
+  <section id="cacar" class="aba">
+    <div class="botoes">
+      <label class="btn" for="foto">📷<span>Câmera</span></label>
+      <label class="btn alt" for="galeria">🖼️<span>Galeria</span></label>
+    </div>
+    <input type="file" id="foto" accept="image/*" capture="environment" hidden>
+    <input type="file" id="galeria" accept="image/*" hidden>
+    <img id="preview" alt="" hidden>
+    <p id="status"></p>
+    <article id="resultado" class="card" hidden>
+      <img id="wikiImg" alt="" hidden>
+      <span id="badge" class="badge"></span>
+      <h2 id="nome"></h2><p id="cient"></p><p id="resumo"></p>
+      <a id="link" target="_blank" rel="noopener">Ler na Wikipédia →</a>
+    </article>
+  </section>
+  <section id="album" class="aba" hidden>
+    <h2>Meu álbum <small id="qtd"></small></h2>
+    <div id="grade" class="grade"></div>
+  </section>
+  <section id="missoes" class="aba" hidden>
+    <h2>Missões do dia</h2><div id="quests"></div>
+    <h2>Conquistas</h2><div id="conquistas"></div>
+  </section>
+</main>
+<nav>
+  <button data-aba="cacar" class="on">📷<span>Caçar</span></button>
+  <button data-aba="album">📖<span>Álbum</span></button>
+  <button data-aba="missoes">🏆<span>Missões</span></button>
+</nav>
+<div id="toast"></div>
+<script src="app.js"></script>
+</body>
+</html>

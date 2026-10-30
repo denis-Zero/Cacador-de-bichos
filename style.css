@@ -1,0 +1,49 @@
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#fff;--card:#fff;--txt:#111;--mudo:#737373;--linha:#e6e6e6;--chip:#f2f2f2;--acc:linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5)}
+@media(prefers-color-scheme:dark){:root{--bg:#000;--card:#121212;--txt:#f5f5f5;--mudo:#a8a8a8;--linha:#262626;--chip:#1c1c1c}}
+body{margin:0;font-family:-apple-system,"Segoe UI",Roboto,system-ui,sans-serif;background:var(--bg);color:var(--txt);padding-bottom:80px}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 85%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--linha);padding:12px 16px 10px}
+.logo{font-size:1.25rem;font-weight:800;letter-spacing:-.5px}
+.nivel{display:flex;align-items:center;gap:10px;margin-top:8px;font-size:.8rem}
+.nivel b{background:var(--acc);color:#fff;padding:2px 10px;border-radius:99px}
+.barra{flex:1;height:5px;background:var(--chip);border-radius:9px;overflow:hidden}
+.barra i{display:block;height:100%;width:0;background:var(--acc);transition:width .5s}
+small{color:var(--mudo)}
+main{max-width:480px;margin:0 auto;padding:14px 0}
+.aba>h2{font-size:1.1rem;margin:18px 16px 10px}
+.botoes{display:flex;gap:10px;padding:0 16px}
+.btn{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;padding:14px;font-size:1.3rem;background:var(--acc);color:#fff;border-radius:14px;cursor:pointer;transition:transform .1s}
+.btn.alt{background:var(--chip);color:var(--txt)}
+.btn span{font-size:.95rem;font-weight:700}
+.btn:active{transform:scale(.96)}
+#preview{width:100%;max-height:420px;object-fit:cover;margin-top:14px}
+#status{text-align:center;color:var(--mudo);min-height:1.4em;margin:10px 16px}
+.card{background:var(--card);border-top:1px solid var(--linha);border-bottom:1px solid var(--linha);padding-bottom:6px;margin-top:6px}
+#wikiImg{width:100%;max-height:360px;object-fit:cover;display:block}
+.card>:not(img){margin-left:16px;margin-right:16px}
+.badge{display:inline-block;margin-top:12px;padding:4px 12px;border-radius:99px;background:var(--acc);color:#fff;font-weight:700;font-size:.8rem}
+#nome{margin:10px 16px 0;font-size:1.3rem}
+#cient{margin:2px 16px 10px;font-style:italic;color:var(--mudo)}
+#resumo{line-height:1.5;font-size:.95rem}
+#link{display:inline-block;margin-bottom:10px;color:#0095f6;font-weight:600;text-decoration:none}
+.grade{display:grid;grid-template-columns:repeat(3,1fr);gap:2px}
+.item{position:relative;aspect-ratio:1;overflow:hidden;background:var(--chip)}
+.item img{width:100%;height:100%;object-fit:cover;display:block}
+.item div{position:absolute;inset:auto 0 0 0;padding:16px 6px 5px;color:#fff;font-size:.72rem;line-height:1.2;background:linear-gradient(transparent,#000a)}
+.item small{color:#ddd}
+.vazio{grid-column:1/-1;color:var(--mudo);text-align:center;padding:40px 16px}
+#quests,#conquistas{padding:0 16px}
+.q{background:var(--card);border:1px solid var(--linha);border-radius:16px;padding:12px 14px;margin-bottom:10px}
+.q.ok{border-color:#2ecc71}
+.q.lock{opacity:.45}
+.q .t{display:flex;justify-content:space-between;font-weight:600;font-size:.95rem}
+.q .t span:last-child{color:var(--mudo);font-weight:500;font-size:.85rem}
+.q .b{height:6px;background:var(--chip);border-radius:9px;margin-top:10px;overflow:hidden}
+.q .b i{display:block;height:100%;background:var(--acc)}
+nav{position:fixed;bottom:0;left:0;right:0;display:flex;background:var(--bg);border-top:1px solid var(--linha);padding-bottom:env(safe-area-inset-bottom)}
+nav button{flex:1;border:0;background:none;padding:10px 0 8px;font-size:1.45rem;color:var(--mudo);display:flex;flex-direction:column;align-items:center;gap:1px;filter:grayscale(1);opacity:.7}
+nav button span{font-size:.68rem;font-weight:600}
+nav button.on{filter:none;opacity:1;color:var(--txt)}
+#toast{position:fixed;top:14px;left:50%;transform:translate(-50%,-130px);background:var(--txt);color:var(--bg);padding:12px 20px;border-radius:99px;font-weight:600;font-size:.9rem;transition:transform .4s;z-index:9;max-width:90%;text-align:center;box-shadow:0 8px 24px #0004}
+#toast.show{transform:translate(-50%,0)}
+[hidden]{display:none!important}
