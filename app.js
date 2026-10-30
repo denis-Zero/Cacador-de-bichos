@@ -1,4 +1,4 @@
-const GEMINI_KEY = "AQ.Ab8RN6KEw6oFgAfCA5pr1pG11BT02rkV8V_1_8JsSLOdW_rIRw";
+const GEMINI_KEY = "AQ.Ab8RN6K6Mbqjk9eYsXC2gtXRkjeZTb3y_jesXX-A6eh_9ArApw";
 const MODELOS = ["gemini-3-flash-preview", "gemini-3.1-flash-lite", "gemini-2.5-flash"];
 
 const $ = id => document.getElementById(id);
