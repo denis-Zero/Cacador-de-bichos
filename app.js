@@ -1,5 +1,5 @@
 const GEMINI_KEY = "AQ.Ab8RN6K6Mbqjk9eYsXC2gtXRkjeZTb3y_jesXX-A6eh_9ArApw";
-const MODELOS = ["gemini-3-flash-preview", "gemini-3.1-flash-lite", "gemini-2.5-flash"];
+const MODELOS = ["gemini-3.6-flash", "gemini-3.5-flash", "gemini-3-flash-preview", "gemini-3.1-flash-lite"];
 
 const $ = id => document.getElementById(id);
 const hoje = () => new Date().toLocaleDateString("sv");
@@ -124,8 +124,8 @@ async function identificarAnimal(b64) {
     generationConfig: { response_mime_type: "application/json" } });
   let ultimo = "";
   for (const m of MODELOS) {
-    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent?key=${GEMINI_KEY}`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: corpo });
+    const r = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${m}:generateContent`, {
+      method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": GEMINI_KEY.trim() }, body: corpo });
     if (r.ok) return JSON.parse((await r.json()).candidates[0].content.parts[0].text);
     ultimo = `${r.status} (${m}) ` + (await r.text()).slice(0, 160);
     if (r.status === 400 || r.status === 403) break; // problema na chave ou no pedido
