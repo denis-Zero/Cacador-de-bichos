@@ -1,5 +1,5 @@
 const GEMINI_KEY = "AQ.Ab8RN6KEw6oFgAfCA5pr1pG11BT02rkV8V_1_8JsSLOdW_rIRw";
-const MODELO = "gemini-3.1-flash-lite";
+const MODELOS = ["gemini-3-flash-preview", "gemini-3.1-flash-lite", "gemini-2.5-flash"];
 
 const $ = id => document.getElementById(id);
 const hoje = () => new Date().toLocaleDateString("sv");
